@@ -1,0 +1,38 @@
+class Solution
+{
+    public:
+    void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
+    {
+        if (root == NULL) {
+            return;
+        }
+        
+        if (root->key == key) {
+            // Find predecessor (rightmost child of left subtree)
+            if (root->left != NULL) {
+                Node* temp = root->left;
+                while (temp->right != NULL) {
+                    temp = temp->right;
+                }
+                pre = temp;
+            }
+            
+            // Find successor (leftmost child of right subtree)
+            if (root->right != NULL) {
+                Node* temp = root->right;
+                while (temp->left != NULL) {
+                    temp = temp->left;
+                }
+                suc = temp;
+            }
+        }
+        else if (key < root->key) {
+            suc = root;
+            findPreSuc(root->left, pre, suc, key);
+        }
+        else {
+            pre = root;
+            findPreSuc(root->right, pre, suc, key);
+        }
+    }
+};
