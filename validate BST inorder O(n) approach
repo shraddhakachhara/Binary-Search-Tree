@@ -1,0 +1,32 @@
+class Solution {
+
+    void inorder(TreeNode* root, queue<int>&q){
+        if(root==NULL){
+            return ;
+        }
+        inorder(root->left,q);
+        q.push(root->val);
+        inorder(root->right,q);
+    }
+
+public:
+    bool isValidBST(TreeNode* root) {
+        if(root==NULL){
+            return true;
+        }
+        queue<int> q;
+        inorder(root,q);
+        int max=q.front();
+        q.pop();
+        while(!q.empty()){
+            if(q.front()>max){
+                max=q.front();
+                q.pop();
+            }
+            else{
+                return false;
+            }
+        }
+        return true;
+    }
+};
