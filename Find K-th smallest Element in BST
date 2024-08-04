@@ -24,3 +24,4 @@ int kthSmallest(BinaryTreeNode<int>* root, int k) {
     //     ans=
     // }
 }
+can also be done using morris traversal
