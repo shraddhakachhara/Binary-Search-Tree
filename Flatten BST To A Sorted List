@@ -1,0 +1,25 @@
+void inorder(TreeNode<int>* root, vector<int>& v){
+        if(root==NULL){
+            return ;
+        }
+        inorder(root->left,v);
+        v.push_back(root->data);
+        inorder(root->right,v);
+    }
+
+TreeNode<int>* flatten(TreeNode<int>* root)
+{
+    vector<int> v;
+    inorder(root,v);
+    TreeNode<int>* head=new TreeNode<int>(v[0]);
+    TreeNode<int>* temp= head;
+    for(int i=1;i<v.size();i++){
+        TreeNode<int>* newnode= new TreeNode<int>(v[i]);
+        temp->left=NULL;//this step is optional
+        temp->right=newnode;
+        temp=temp->right;
+    }
+    temp->left=NULL;//this step is optional
+    temp->right=NULL;//this step is optional
+    return head;
+}
