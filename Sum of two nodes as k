@@ -1,0 +1,25 @@
+class Solution {
+    void inorder(TreeNode* root, vector<int>& v){
+        if(root==NULL){
+            return ;
+        }
+        inorder(root->left,v);
+        v.push_back(root->val);
+        inorder(root->right,v);
+    }
+public:
+    bool findTarget(TreeNode* root, int k) {
+        vector<int> v;
+        inorder(root,v);
+        int sum=0;
+        for(int i=0;i<v.size()-1;i++){
+            for(int j=i+1;j<v.size();j++){
+                sum=v[i]+v[j];
+                if(sum==k){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+};
